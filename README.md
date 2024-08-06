@@ -1,16 +1,16 @@
-Программа, разработанная на кроссплатформенном фреймворке Avalonia, предназначена для использования на автозаправочных станциях. 
-Это многофункциональное приложение, которое обеспечивает отображение ключевой информации для клиентов и предоставляет возможности для демонстрации рекламного контента.
+The program, developed on the Avalonia cross-platform framework, is intended for use at gas stations. 
+It is a feature-rich application that provides the display of key information for customers and provides opportunities to showcase advertising content.
 
-Основные функции программы включают:
+The main functions of the program include:
 
-1. Отображение информации о топливе:
-- Тип топлива
-- Текущая стоимость
-2. Медиа-контент:
-- Воспроизведение фото и видео рекламных роликов, что позволяет эффективно использовать время ожидания клиентов и информировать их о текущих акциях и предложениях.
-3. Панель управления:
-- Окно для ввода информации, где можно оперативно обновлять данные о цене и типе топлива.
-- Меню настроек, предоставляющее пользователю возможность настраивать параметры приложения под специфические нужды станции, включая конфигурацию отображаемых данных и медиа-контента.
+1. Display of fuel information:
+- Fuel type
+- Current value
+2. Media content:
+- Playback of photos and videos of commercials, which allows you to effectively use the waiting time of customers and inform them about current promotions and offers.
+3. Control Panel:
+- A window for entering information, where you can quickly update data on the price and type of fuel.
+- The settings menu, which provides the user with the ability to customize the application settings for the specific needs of the station, including the configuration of the displayed data and media content.
 
-Программа разработана с учетом требований кроссплатформенности, что обеспечивает её работу на различных операционных системах без необходимости внесения изменений в исходный код.
-Интерфейс интуитивно понятен и прост в использовании, что позволяет персоналу автозаправочных станций быстро освоить управление и эффективно использовать все функции приложения.
+The program is designed to meet the requirements of cross-platform compatibility, which ensures that it works on various operating systems without the need to make changes to the source code.
+The interface is intuitive and easy to use, which allows the staff of gas stations to quickly master the management and effectively use all the functions of the application.
