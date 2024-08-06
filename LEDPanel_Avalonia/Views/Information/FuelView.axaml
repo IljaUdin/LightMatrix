@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converter="clr-namespace:LEDPanel_Avalonia.Converter"
+			 mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="350"
+			 Width="{Binding $parent[Window].DataContext.tableConfiguration.WindowWidth}"
+			 Height="{Binding $parent[Window].DataContext.tableConfiguration.WindowHeight}"
+             x:Class="LEDPanel_Avalonia.Views.Information.FuelView">
+
+
+	<UserControl.Resources>
+		<converter:CheckBoxToGridLinesVisibilityConverter x:Key="CheckBoxToGridLinesVisibilityConverter"/>
+		<converter:ImageConverter x:Key="ImageConverter"/>
+		<converter:ImageVisibilityConverter x:Key="ImageVisibilityConverter"/>
+		<converter:MainPicturePathToHeightConverter x:Key="MainPicturePathToHeightConverter"/>
+		<converter:LocationCellConverter x:Key="LocationCellConverter"/>
+		<converter:SolidColorBrushConverter x:Key="SolidColorBrushConverter"/>
+		<converter:StringToFontFamilyConverter x:Key="StringToFontFamilyConverter"/>
+	</UserControl.Resources>
+
+	<UserControl.Foreground>
+		<Binding Path="tableConfiguration.TextColor"
+                 Converter="{StaticResource SolidColorBrushConverter}"/>
+	</UserControl.Foreground>
+
+	<Grid >
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+
+		<Image	Grid.Row="0"
+				Margin="{Binding tableConfiguration.LocationMainPicture, Converter={StaticResource LocationCellConverter}}"
+				Source="{Binding Path=mainModel.MainPicturePath, Converter={StaticResource ImageConverter}}"
+				Width="{Binding tableConfiguration.MainPictureWidth}">
+			<Image.Height>
+				<MultiBinding Converter="{StaticResource MainPicturePathToHeightConverter}">
+					<Binding Path="mainModel.MainPicturePath"/>
+					<Binding Path="tableConfiguration.MainPictureHeight"/>
+				</MultiBinding>
+			</Image.Height>
+		</Image>
+
+		<DataGrid Grid.Row="1"
+				  ItemsSource="{Binding mainModel.FuelItems}"
+				  HeadersVisibility="None"
+				  GridLinesVisibility="{Binding tableConfiguration.ShowGridLines, Converter={StaticResource CheckBoxToGridLinesVisibilityConverter}}"
+				  AutoGenerateColumns="False"
+				  HorizontalAlignment="Stretch"
+				  HorizontalScrollBarVisibility="Hidden"
+				  VerticalScrollBarVisibility="Hidden"
+			      IsHitTestVisible="False"
+				  BorderThickness="-1">
+
+			<DataGrid.Columns>
+
+				<DataGridTemplateColumn Width="{Binding tableConfiguration.Column1Width}">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Grid Margin="{Binding LocationCell1, Converter={StaticResource LocationCellConverter}}" Height="{Binding RowHeight}" HorizontalAlignment="Center" VerticalAlignment="Center">
+								<Image Source="{Binding ProfilePicturePath, Converter={StaticResource ImageConverter}}"
+									   Width="{Binding ImageWidth}" Height="{Binding ImageHeight}"/>
+							</Grid>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Width="{Binding tableConfiguration.Column2Width}">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding FuelType}" Padding="{Binding LocationCell2, Converter={StaticResource LocationCellConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"
+									   FontSize="{Binding DataContext.tableConfiguration.FontSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+									   FontFamily="{Binding DataContext.tableConfiguration.Font, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringToFontFamilyConverter}}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Width="{Binding tableConfiguration.Column3Width}">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Price}" Padding="{Binding LocationCell3, Converter={StaticResource LocationCellConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"
+									   FontSize="{Binding DataContext.tableConfiguration.FontSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+									   FontFamily="{Binding DataContext.tableConfiguration.Font, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource StringToFontFamilyConverter}}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</Grid>
+
+</UserControl>

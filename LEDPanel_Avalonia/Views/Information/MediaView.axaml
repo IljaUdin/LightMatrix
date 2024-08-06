@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+			 xmlns:converter="clr-namespace:LEDPanel_Avalonia.Converter"
+             Width="{Binding $parent[Window].DataContext.tableConfiguration.WindowWidth}"
+			 Height="{Binding $parent[Window].DataContext.tableConfiguration.WindowHeight}"
+             x:Class="LEDPanel_Avalonia.Views.Information.MediaView">
+
+	<UserControl.Resources>
+		<converter:ImageConverter x:Key="ImageConverter"/>
+	</UserControl.Resources>
+
+	<Grid>
+
+		<Image Source="{Binding MediaFilePath, Converter={StaticResource ImageConverter}}" IsVisible="{Binding IsImageVisible}" Stretch="Uniform"/>
+
+		<vlc:VideoView MediaPlayer="{Binding MediaPlayer}" IsVisible="{Binding IsVideoVisible}"/>
+
+	</Grid>
+
+</UserControl>

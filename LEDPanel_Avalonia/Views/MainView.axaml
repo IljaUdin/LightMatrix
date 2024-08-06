@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:rxui="http://reactiveui.net"
+			 xmlns:app="clr-namespace:LEDPanel_Avalonia.Locator"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+			 xmlns:vm="using:LEDPanel_Avalonia.ViewModels"
+			 xmlns:views="clr-namespace:LEDPanel_Avalonia.Views"
+             x:Class="LEDPanel_Avalonia.Views.MainView"
+			 x:DataType="vm:MainViewModel">
+
+	<Grid>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<ContentControl Content="{Binding DataControlView}" Margin="20 35 20 20"/>
+		<!--
+		<views:DataControlView CornerRadius="20" Margin="10"/>
+		-->
+		
+
+		<rxui:RoutedViewHost Grid.Column="1" Margin="20 35 20 20" Router="{Binding Router}" CornerRadius="10">
+			<rxui:RoutedViewHost.DefaultContent>
+			<TransitioningContentControl Content="{Binding Router.CurrentViewModel}">
+				<TransitioningContentControl.PageTransition>
+					<CompositePageTransition>
+						<CrossFade Duration="0:00:05.500" />
+						<PageSlide Duration="0:00:01.500" Orientation="Horizontal" />
+						<PageSlide Duration="0:00:01.500" Orientation="Vertical" />
+					</CompositePageTransition>
+				</TransitioningContentControl.PageTransition>
+			</TransitioningContentControl>
+			</rxui:RoutedViewHost.DefaultContent>
+			<rxui:RoutedViewHost.ViewLocator>
+				<app:ViewLocator/>
+			</rxui:RoutedViewHost.ViewLocator>
+		</rxui:RoutedViewHost>
+
+	</Grid>
+
+</UserControl>
