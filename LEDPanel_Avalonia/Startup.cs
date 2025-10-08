@@ -37,6 +37,7 @@ namespace LEDPanel_Avalonia
             services.AddSingleton<MediaViewModel>();
             services.AddSingleton<DataControlView>();
             services.AddSingleton<DataControlViewModel>();
+            services.AddSingleton<IRecordService, RecordService>();
 
             services.AddSingleton<DefenderViewModel>();
 

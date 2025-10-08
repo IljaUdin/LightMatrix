@@ -2,6 +2,7 @@
 using Avalonia.Platform.Storage;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,25 @@ namespace LEDPanel_Avalonia.Services
             });
 
             return files.Count >= 1 ? files[0] : null;
+        }
+
+        public async Task<string?> SaveFileDialogAsync()
+        {
+            var suggestedFileName = "Видеозапись";
+            
+            var dialog = new SaveFileDialog
+            {
+                Title = "Сохранить файл",
+                InitialFileName = suggestedFileName,
+                Filters = new()
+                {
+                    new() { Name = "Видеофайлы", Extensions = new List<string> { "mp4" } }
+                }
+            };
+            
+            var result = await dialog.ShowAsync(_target);
+
+            return result;
         }
     }
 }

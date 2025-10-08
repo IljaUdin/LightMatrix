@@ -3,11 +3,17 @@ using LEDPanel_Avalonia.Services;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using FluentAvalonia.UI.Controls;
 
 namespace LEDPanel_Avalonia.ViewModels
 {
     internal class DataControlViewModel : ViewModelBase
     {
+        private readonly IRecordService _recordService;
+        
         public MainModel mainModel { get; }
         public TableConfiguration tableConfiguration {  get; }
 
@@ -17,11 +23,39 @@ namespace LEDPanel_Avalonia.ViewModels
             get => _selectedMediaFile;
             set => this.RaiseAndSetIfChanged(ref _selectedMediaFile, value);
         }
+        
+        public ICommand CreateVideoCommand { get; private set; }
 
-        public DataControlViewModel(MainModel mainModel, TableConfiguration tableConfiguration)
+        public DataControlViewModel(MainModel mainModel, TableConfiguration tableConfiguration, IRecordService recordService)
         {
             this.mainModel = mainModel;
             this.tableConfiguration = tableConfiguration;
+            _recordService =  recordService;
+
+            CreateVideoCommand = ReactiveCommand.CreateFromTask(CreateVideo);
+        }
+
+        private async Task CreateVideo()
+        {
+            try
+            {
+                await _recordService.CreateVideo();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText("log.txt", $"{DateTime.Now}: Error create video - {ex}\n");
+
+                var contentDialog = new ContentDialog()
+                {
+                    Title = "Ошибка",
+                    Content = "Для корректной работы приложения требуется установка пакета FFmpeg. \n" +
+                              "Пожалуйста, убедитесь, что он установлен и доступен в системе.",
+                    PrimaryButtonText = "Ok",
+                    DefaultButton = ContentDialogButton.Primary
+                };
+
+                await contentDialog.ShowAsync();
+            }
         }
 
         public void SaveModel()

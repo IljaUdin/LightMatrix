@@ -1,8 +1,10 @@
 ﻿using LEDPanel_Avalonia.Model;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
+using Splat;
 using System;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace LEDPanel_Avalonia.ViewModels.Settings
 {

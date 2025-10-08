@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:LEDPanel_Avalonia.ViewModels"
+             xmlns:controls="using:FluentAvalonia.UI.Controls"
 			 xmlns:converter="clr-namespace:LEDPanel_Avalonia.Converter"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
              x:Class="LEDPanel_Avalonia.Views.DataControlView">
@@ -112,10 +113,7 @@
 									</Button.IsVisible>
 									<PathIcon Data="{Binding NewImageIcon}"  />
 								</Button>
-								<Image Source="{Binding ProfilePicturePath}" Height="30" ToolTip.Tip="Для удаления нажать ПКМ">
-									<Image.Source>
-										<Binding Path="ProfilePicturePath" Converter="{StaticResource ImageConverter}"/>
-									</Image.Source>
+								<Image Source="{Binding ProfilePicturePath, Converter={StaticResource ImageConverter}}" Height="30" ToolTip.Tip="Для удаления нажать ПКМ">
 									<Image.ContextMenu>
 										<ContextMenu>
 											<MenuItem Header="Удалить" Command="{Binding DeleteImageCommand}"/>
@@ -155,7 +153,9 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 
-				<TextBlock Margin="0 10" Text="Медиа"/>
+				<Button Grid.Column="0" Command="{Binding CreateVideoCommand}" ToolTip.Tip="Сформировать видеофрагмент" >
+					<PathIcon Data="{StaticResource ResourceKey=VideoFile}"/>
+				</Button>
 
 				<ComboBox Grid.Column="1" Margin="15,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
 						  ItemsSource="{Binding mainModel.MediaFiles}" SelectedItem="{Binding SelectedMediaFile}"
@@ -173,7 +173,13 @@
 				</ComboBox>
 
 				<Button Grid.Column="2" Command="{Binding AddMediaFile}">
-					<PathIcon Data="{StaticResource ResourceKey=Add}"/>
+					<Button.Content>
+						<Grid>
+							<PathIcon Data="{StaticResource ResourceKey=Add}"/>
+							
+						</Grid>
+					</Button.Content>
+					
 				</Button>
 
 			</Grid>

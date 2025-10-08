@@ -8,5 +8,7 @@ namespace LEDPanel_Avalonia.Services
         public Task<IStorageFile?> OpenFileImageAsync();
 
         public Task<IStorageFile?> OpenFileMediaAsync();
+
+        public Task<string> SaveFileDialogAsync();
     }
 }

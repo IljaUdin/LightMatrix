@@ -35,10 +35,10 @@ namespace LEDPanel_Avalonia.ViewModels.Information
             _timer.Interval = tableConfiguration.TextTimer * 1000; // Start with fuelViewModel display time
             _timer.Start();
 
-            _timerDefender = new Timer();
-            _timerDefender.Elapsed += OnTimedEventDefender;
-            _timerDefender.Interval = 3600 * 1000;
-            _timerDefender.Start();
+            // _timerDefender = new Timer();
+            // _timerDefender.Elapsed += OnTimedEventDefender;
+            // _timerDefender.Interval = 3600 * 1000;
+            // _timerDefender.Start();
         }
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
